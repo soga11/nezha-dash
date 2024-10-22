@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    /* 全局颜色变量 */
     --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
     --card: 0 0% 100%;
@@ -24,6 +25,8 @@
     --input: 20 5.9% 90%;
     --ring: 20 14.3% 4.1%;
     --radius: 1rem;
+
+    /* 图表颜色 */
     --chart-1: 220 70% 50%;
     --chart-2: 340 75% 55%;
     --chart-3: 30 80% 55%;
@@ -34,8 +37,12 @@
     --chart-8: 252 50% 50%;
     --chart-9: 288 50% 50%;
     --chart-10: 324 50% 50%;
+    
+    /* 背景图片 */
+    --background-image: url('https://t.mwm.moe/ys/');
   }
 
+  /* 黑暗模式变量 */
   .dark {
     --background: 20 14.3% 4.1%;
     --foreground: 60 9.1% 97.8%;
@@ -67,24 +74,28 @@
     --chart-9: 288 50% 50%;
     --chart-10: 324 50% 50%;
   }
-}
 
-@layer base {
+  /* 全局样式 */
   * {
     @apply border-border;
   }
+
   html {
     @apply scroll-smooth;
   }
+
   body {
     @apply bg-background text-foreground;
-    /* font-feature-settings: "rlig" 1, "calt" 1; */
+    background-image: var(--background-image);
+    background-size: cover;
+    background-position: center;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
   }
 }
 
 @layer utilities {
+  /* 数字步骤样式 */
   .step {
     counter-increment: step;
   }
@@ -97,15 +108,18 @@
 }
 
 @media (max-width: 640px) {
+  /* 移动端容器样式 */
   .container {
     @apply px-4;
   }
 }
 
+/* 选中文本样式 */
 ::selection {
   @apply bg-stone-300 dark:bg-stone-800;
 }
 
+/* Hamster 加载动画 */
 .hamster-loading-wrapper {
   --size: 12px;
   height: var(--size);
@@ -139,46 +153,12 @@
   width: 30%;
 }
 
-.hamster-loading-bar:nth-child(1) {
-  animation-delay: -0.8s;
-  transform: rotate(0deg) translate(120%);
+.hamster-loading-bar:nth-child(n) {
+  animation-delay: calc((n - 1) * -0.1s);
+  transform: rotate(calc((n - 1) * 45deg)) translate(120%);
 }
 
-.hamster-loading-bar:nth-child(2) {
-  animation-delay: -0.7s;
-  transform: rotate(45deg) translate(120%);
-}
-
-.hamster-loading-bar:nth-child(3) {
-  animation-delay: -0.6s;
-  transform: rotate(90deg) translate(120%);
-}
-
-.hamster-loading-bar:nth-child(4) {
-  animation-delay: -0.5s;
-  transform: rotate(135deg) translate(120%);
-}
-
-.hamster-loading-bar:nth-child(5) {
-  animation-delay: -0.4s;
-  transform: rotate(180deg) translate(120%);
-}
-
-.hamster-loading-bar:nth-child(6) {
-  animation-delay: -0.3s;
-  transform: rotate(225deg) translate(120%);
-}
-
-.hamster-loading-bar:nth-child(7) {
-  animation-delay: -0.2s;
-  transform: rotate(270deg) translate(120%);
-}
-
-.hamster-loading-bar:nth-child(8) {
-  animation-delay: -0.1s;
-  transform: rotate(315deg) translate(120%);
-}
-
+/* 动画 */
 @keyframes hamster-fade-in {
   0% {
     opacity: 0;
@@ -210,10 +190,17 @@
   }
 }
 
+/* 隐藏滚动条 */
 .scrollbar-hidden {
-  scrollbar-width: none; /* Firefox */
+  @apply scrollbar-none;
 }
 
-.scrollbar-hidden::-webkit-scrollbar {
-  display: none; /* Chrome, Safari 和 Opera */
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none; /* Chrome, Safari 和 Opera */
+  }
 }
