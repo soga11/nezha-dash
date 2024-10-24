@@ -1,17 +1,17 @@
 "use client";
 
-import { NetworkChartClient } from "@/app/[locale]/(main)/ClientComponents/NetworkChart";
-import ServerDetailChartClient from "@/app/[locale]/(main)/ClientComponents/ServerDetailChartClient";
-import ServerDetailClient from "@/app/[locale]/(main)/ClientComponents/ServerDetailClient";
+import { NetworkChartClient } from "@/app/(main)/ClientComponents/NetworkChart";
+import ServerDetailChartClient from "@/app/(main)/ClientComponents/ServerDetailChartClient";
+import ServerDetailClient from "@/app/(main)/ClientComponents/ServerDetailClient";
 import TabSwitch from "@/components/TabSwitch";
 import { Separator } from "@/components/ui/separator";
-import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-export default function Page({ params }: { params: { id: string } }) {
-  const t = useTranslations("TabSwitch");
+export const runtime = 'edge';
 
-  const tabs = [t("Detail"), t("Network")];
+export default function Page({ params }: { params: { id: string } }) {
+
+  const tabs = ["Detail", "Network"];
   const [currentTab, setCurrentTab] = useState(tabs[0]);
   return (
     <div className="mx-auto grid w-full max-w-5xl gap-2">
